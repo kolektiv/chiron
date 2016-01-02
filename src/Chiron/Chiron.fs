@@ -1007,6 +1007,27 @@ module Mapping =
     [<RequireQualifiedAccess>]
     module Json =
 
+        [<RequireQualifiedAccess>]
+        module Write =
+
+            let inline pair key value =
+                    Json.Optic.set (Json.Object_ >?> Map.value_ key) (Some (toJson value))
+
+            let inline value value =
+                    Json.Optic.set id_ (toJson value)
+
+        [<RequireQualifiedAccess>]
+        module Read =
+
+            let inline pair key =
+                    Json.Optic.get (Json.Object_ >?> Map.value_ key)
+                >>= function | Some x -> Json.ofResult (fromJson x)
+                             | None -> Json.error "Fail!"
+
+            let inline value () =
+                    Json.Optic.get id_
+                >>= function | x -> Json.ofResult (fromJson x)
+
         (* Read/Write *)
 
         let missingMember key =
