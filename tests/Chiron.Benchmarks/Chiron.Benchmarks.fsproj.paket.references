@@ -1,0 +1,6 @@
+Aether
+
+group Benchmark
+
+  BenchmarkDotNet
+  Newtonsoft.Json
