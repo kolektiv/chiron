@@ -34,7 +34,7 @@ type SimpleRecord =
 
 (* Benchmarks *)
 
-[<BenchmarkTask>]
+[<BenchmarkTask (jitVersion = BenchmarkJitVersion.RyuJit)>]
 type ChironVsJsonNet () =
 
     let simpleRecord =
