@@ -44,13 +44,24 @@ type ChironVsJsonNet () =
           Address = "Brighton"
           Scores = [| 12; 20; 45 |] }
 
-    [<Benchmark>]
+    let simpleRecordJson =
+        """{"address":"Brighton","id":42,"name":"Andrew","scores":[12,20,45]}"""
+
+    [<Benchmark ("Chiron Serialization")>]
     member __.ChironSerialize () =
         (Json.serialize >> Json.format) simpleRecord
 
-    [<Benchmark>]
+    [<Benchmark ("Chiron Deserialization")>]
+    member __.ChironDeserialize () : SimpleRecord =
+        (Json.parse >> Json.deserialize) simpleRecordJson
+
+    [<Benchmark ("Json.Net Serialization")>]
     member __.JsonNetSerialize () =
         JsonConvert.SerializeObject simpleRecord
+
+    [<Benchmark ("Json.Net Deserialization")>]
+    member __.JsonNetDeserialize () : SimpleRecord =
+        JsonConvert.DeserializeObject<SimpleRecord> simpleRecordJson
 
 (* Main *)
 
@@ -59,5 +70,6 @@ let main _ =
 
     let runner = new BenchmarkRunner ()
     let reports = runner.Run<ChironVsJsonNet> ()
+    let _ = System.Console.ReadLine ()
 
     0
