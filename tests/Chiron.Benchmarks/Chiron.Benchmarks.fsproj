@@ -52,9 +52,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\targets\Chiron.Net40\Chiron.Net40.fsproj">
-      <Name>Chiron.Net40</Name>
-      <Project>{ff38d788-043b-4597-bf02-d198cfaab1db}</Project>
+    <ProjectReference Include="..\..\src\Chiron\Chiron.fsproj">
+      <Name>Chiron</Name>
+      <Project>{751fdb83-50c4-47e4-931e-c2479366b2b6}</Project>
       <Private>True</Private>
     </ProjectReference>
   </ItemGroup>

@@ -33,12 +33,9 @@ type SimpleRecord =
 
 (* Benchmarks *)
 
-[<BenchmarkTask (platform = BenchmarkPlatform.X86,
-                 jitVersion = BenchmarkJitVersion.LegacyJit, 
-                 mode = BenchmarkMode.SingleRun,
-                 processCount = 1,
-                 warmupIterationCount = 1,
-                 targetIterationCount = 1)>]
+[<BenchmarkTask (platform = BenchmarkPlatform.AnyCpu,
+                 jitVersion = BenchmarkJitVersion.LegacyJit,
+                 framework = BenchmarkFramework.V452)>]
 type ChironVsJsonNet () =
 
     let simpleRecord =
