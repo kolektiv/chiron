@@ -4,6 +4,7 @@ open BenchmarkDotNet
 open BenchmarkDotNet.Tasks
 open Chiron
 open Chiron.Operators
+open Jil
 open Newtonsoft.Json
 
 (* Examples *)
@@ -33,9 +34,7 @@ type SimpleRecord =
 
 (* Benchmarks *)
 
-[<BenchmarkTask (platform = BenchmarkPlatform.AnyCpu,
-                 jitVersion = BenchmarkJitVersion.LegacyJit,
-                 framework = BenchmarkFramework.V452)>]
+[<BenchmarkTask>]
 type ChironVsJsonNet () =
 
     let simpleRecord =
@@ -54,6 +53,14 @@ type ChironVsJsonNet () =
     [<Benchmark ("Chiron Deserialization")>]
     member __.ChironDeserialize () : SimpleRecord =
         (Json.parse >> Json.deserialize) simpleRecordJson
+
+    [<Benchmark ("Jil Serialization")>]
+    member __.JilSerialize () =
+        JSON.Serialize simpleRecord
+
+    [<Benchmark ("Jil Deserialization")>]
+    member __.JilDeserialize () : SimpleRecord =
+        JSON.Deserialize<SimpleRecord> simpleRecordJson
 
     [<Benchmark ("Json.Net Serialization")>]
     member __.JsonNetSerialize () =

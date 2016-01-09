@@ -9,7 +9,10 @@ NUGET
   remote: http://nuget.org/api/v2
   specs:
     BenchmarkDotNet (0.8.1)
+    Jil (2.12.1)
+      Sigil (>= 4.5.0)
     Newtonsoft.Json (8.0.1)
+    Sigil (4.5.0)
 
 GROUP Build
 NUGET

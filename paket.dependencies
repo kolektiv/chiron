@@ -25,4 +25,6 @@ group Benchmark
   source http://nuget.org/api/v2
 
   nuget BenchmarkDotNet
+  nuget Jil
   nuget Newtonsoft.Json
+  nuget Sigil = 4.5.0
